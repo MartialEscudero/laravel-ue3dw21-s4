@@ -70,7 +70,7 @@
                             @endif
                         @else
                             <li class="nav-item">
-                              <a class="nav-link">{{ Auth::user()->name }}</a>
+                              <a class="nav-link">Connecté : {{ Auth::user()->name }}</a>
                             </li>
                             @if(Auth::user() && (Auth::user()->role == 'admin'))
                             <li class="nav-item">

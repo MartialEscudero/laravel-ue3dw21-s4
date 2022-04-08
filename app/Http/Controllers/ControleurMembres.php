@@ -68,6 +68,11 @@ class ControleurMembres extends Controller
     return view('pages_site/retour_creation');
   }
 
+  public function truecompte(Request $request) {
+    $users = $this->users->all();
+    return view('pages_site/admin', compact('users'));
+  }
+
   public function editer($numero) {
     $un_membre = $this->les_membres->find($numero);
     $membre_description = $this->les_description->find($numero);

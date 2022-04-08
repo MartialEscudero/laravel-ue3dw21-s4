@@ -1,4 +1,3 @@
-@if(Auth::user() && (Auth::user()->role == 'admin'))
 @extends('layouts.app')
 @section('entete')
 @stop
@@ -9,6 +8,7 @@ Administration
 Infos Membre
 @stop
 @section('content')
+@if(Auth::user() && (Auth::user()->role == 'admin'))
 <h1>Administration</h1>
 <table class="table table-striped table-bordered">
   <thead>
@@ -30,15 +30,21 @@ Infos Membre
           <td>Vérifié</td>
           @endif
           <td>
-
+            @if($user->role == 'user')
+            <a type="button" class="btn btn-success">Passer role admin</a>
+            @endif
+            @if($user->user_verified == 0)
+            <a type="button" class="btn btn-warning" onclick="window.location='{{ url('truecompte') }}'">Vérifier le compte</a>
+            @endif
           </td>
       </tr>
     @endforeach
   </tbody>
 </table>
-
+@else
+<p>Vous n'êtes pas administrateur.</p>
+@endif
 @stop
 @section('pied_page')
 LicenceProServiceTic 2022
 @stop
-@endif
