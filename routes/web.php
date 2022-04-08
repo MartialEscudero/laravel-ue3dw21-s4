@@ -43,6 +43,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
+Route::get('admin','App\Http\Controllers\ControleurMembres@admin');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/identite','App\Http\Controllers\ControleurMembres@identite');
 Route::get('/protege','App\Http\Controllers\ControleurMembres@acces_protege')

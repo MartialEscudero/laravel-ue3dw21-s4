@@ -13,7 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    @if (Auth::user() && (Auth::user()->email_verified_at == true))
+                    @if (Auth::user() && (Auth::user()->user_verified == 1))
                     {{ __('Vous êtes bien connecté !') }}
                     @else
                     {{ __('Votre compte doit être validé par un administrateur pour accéder au site !') }}

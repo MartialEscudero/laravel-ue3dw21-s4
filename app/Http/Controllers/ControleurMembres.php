@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use App\Models\Membre;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Description;
@@ -32,10 +33,11 @@ class ControleurMembres extends Controller
   protected $les_membres;
   protected $soumissions;
 
-  public function __construct(Membre $membres,Description $description,Request $requetes) {
+  public function __construct(Membre $membres,User $users,Description $description,Request $requetes) {
     $this->les_membres = $membres;
     $this->soumissions = $requetes;
     $this->les_description = $description;
+    $this->users = $users;
   }
 
   public function index() {
@@ -85,4 +87,10 @@ class ControleurMembres extends Controller
     $un_membre->save();
     return view('pages_site/retour_edition');
   }
+
+  public function admin() {
+    $users = $this->users->all();
+    return view('pages_site/admin', compact('users'));
+  }
+  
 }
