@@ -68,8 +68,35 @@ class ControleurMembres extends Controller
     return view('pages_site/retour_creation');
   }
 
-  public function truecompte(Request $request) {
+  public function valideaccount($iduser) {
     $users = $this->users->all();
+    $user = $users->find($iduser);
+    $user->user_verified = 1;
+    $user->save();
+    return view('pages_site/admin', compact('users'));
+  }
+
+  public function invalideaccount($iduser) {
+    $users = $this->users->all();
+    $user = $users->find($iduser);
+    $user->user_verified = 0;
+    $user->save();
+    return view('pages_site/admin', compact('users'));
+  }
+
+  public function adminaccount($iduser) {
+    $users = $this->users->all();
+    $user = $users->find($iduser);
+    $user->role = 'admin';
+    $user->save();
+    return view('pages_site/admin', compact('users'));
+  }
+
+  public function useraccount($iduser) {
+    $users = $this->users->all();
+    $user = $users->find($iduser);
+    $user->role = 'user';
+    $user->save();
     return view('pages_site/admin', compact('users'));
   }
 

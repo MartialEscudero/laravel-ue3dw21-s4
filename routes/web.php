@@ -31,7 +31,10 @@ Route::get('membres', 'App\Http\Controllers\ControleurMembres@index');
 
 Route::get('membre/{numero}', 'App\Http\Controllers\ControleurMembres@afficher');
 Route::get('creer', 'App\Http\Controllers\ControleurMembres@creer');
-Route::get('truecompte', 'App\Http\Controllers\ControleurMembres@truecompte');
+Route::get('valideaccount/{id}', 'App\Http\Controllers\ControleurMembres@valideaccount');
+Route::get('invalideaccount/{id}', 'App\Http\Controllers\ControleurMembres@invalideaccount');
+Route::get('adminaccount/{id}', 'App\Http\Controllers\ControleurMembres@adminaccount');
+Route::get('useraccount/{id}', 'App\Http\Controllers\ControleurMembres@useraccount');
 Route::post('creation/membre', 'App\Http\Controllers\ControleurMembres@enregistrer');
 Route::get('modifier/{id}', 'App\Http\Controllers\ControleurMembres@editer');
 Route::patch('miseAJour/{id}', 'App\Http\Controllers\ControleurMembres@miseAJour');

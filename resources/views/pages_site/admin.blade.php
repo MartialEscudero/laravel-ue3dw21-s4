@@ -31,10 +31,18 @@ Infos Membre
           @endif
           <td>
             @if($user->role == 'user')
-            <a type="button" class="btn btn-success">Passer role admin</a>
+            <a type="button" class="btn btn-warning" onclick="window.location='{{ url('adminaccount',$user->id) }}'">Passer utilisateur admin</a>
+            @else
+              @if($user->name !== 'Admin')
+              <a type="button" class="btn btn-info" onclick="window.location='{{ url('useraccount',$user->id) }}'">Enlever le role admin</a>
+              @endif
             @endif
             @if($user->user_verified == 0)
-            <a type="button" class="btn btn-warning" onclick="window.location='{{ url('truecompte') }}'">Vérifier le compte</a>
+            <a type="button" class="btn btn-success" onclick="window.location='{{ url('valideaccount',$user->id) }}'">Vérifier le compte</a>
+            @else
+              @if($user->name !== 'Admin')
+              <a type="button" class="btn btn-danger" onclick="window.location='{{ url('invalideaccount',$user->id) }}'">Supprimer la vérification</a>
+              @endif
             @endif
           </td>
       </tr>
