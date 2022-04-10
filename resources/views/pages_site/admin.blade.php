@@ -21,7 +21,20 @@ Infos Membre
   </thead>
   <tbody>
     @foreach ($users as $user)
-      <tr>
+      @if($user->name == Auth::user()->name)
+        <tr>
+          <td>{{ $user->name }}</td>
+          <td>{{ $user->role }}</td>
+          @if($user->user_verified == 0)
+          <td>Non Vérifié</td>
+          @else
+          <td>Vérifié</td>
+          @endif
+          <td>
+          </td>
+        </tr>
+        @else
+        <tr>
           <td>{{ $user->name }}</td>
           <td>{{ $user->role }}</td>
           @if($user->user_verified == 0)
@@ -45,7 +58,8 @@ Infos Membre
               @endif
             @endif
           </td>
-      </tr>
+        </tr>
+      @endif
     @endforeach
   </tbody>
 </table>
