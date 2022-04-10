@@ -11,31 +11,35 @@ Modification des infos du membre
 <p>Vous devez être connecté pour accéder à cette fonctionnalité.</p>
 @else
   @section('content')
-    @if ($un_membre->nom.' '.$un_membre->prenom === Auth::user()->name)
-      <div class="formgroup">
-        {!! Form::model($un_membre,['url' => url('miseAJour',$un_membre->id),'method' => 'PATCH']) !!}
+    @if(Auth::user() && Auth::user()->user_verified == 1)
+      @if ($un_membre->nom.' '.$un_membre->prenom === Auth::user()->name)
         <div class="formgroup">
-          {{ Form::label('nom', 'Nom') }}
-          {{ Form::text('nom') }}
+          {!! Form::model($un_membre,['url' => url('miseAJour',$un_membre->id),'method' => 'PATCH']) !!}
+          <div class="formgroup">
+            {{ Form::label('nom', 'Nom') }}
+            {{ Form::text('nom') }}
+          </div>
+          <div class="formgroup">
+            {{ Form::label('prenom', 'Prenom :') }}
+            {{ Form::text('prenom') }}
+          </div>
+          <div class="formgroup">
+            {{ Form::label('adresse', 'Adresse électronique') }}
+            {{ Form::text('adresse') }}
+          </div>
+          <p>
+          </p>
+          {!! Form::submit("Modifier membre", array('class' => 'btn btn-info')) !!}
+          {!! Form::close() !!}
         </div>
-        <div class="formgroup">
-          {{ Form::label('prenom', 'Prenom :') }}
-          {{ Form::text('prenom') }}
-        </div>
-        <div class="formgroup">
-          {{ Form::label('adresse', 'Adresse électronique') }}
-          {{ Form::text('adresse') }}
-        </div>
-        <p>
-        </p>
-        {!! Form::submit("Modifier membre", array('class' => 'btn btn-info')) !!}
-        {!! Form::close() !!}
-      </div>
+      @else
+        <p>Vous ne pouvez pas éditer un membre qui ne correspond pas à votre compte.</p>
+      @endif
     @else
-      <p>Vous ne pouvez pas éditer un membre qui ne correspond pas à votre compte.</p>
+    <p>Vous devez vous connecté et avoir un compte validé par un administrateur pour voir cette page !</p>
     @endif
+  @stop
 @endguest
-@stop
 @section('pied_page')
 LicenceProServiceTic 2022
 @stop
